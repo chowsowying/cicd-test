@@ -29,3 +29,13 @@ jobs:
         cache: maven
     - name: Perform Unit Test Cases
       run: mvn -B test
+      
+  security:
+    name: SA Scan using SNYK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
